@@ -1,0 +1,4 @@
+2025-03-14 00:35:04,825 - reports - ERROR: Возникла ошибка 'function' object is not subscriptable
+2025-03-14 00:35:04,825 - reports - INFO: Записан результат работы функции <function spending_by_weekday at 0x105402fc0>
+2025-03-14 00:35:04,826 - reports - ERROR: Возникла ошибка 'function' object is not subscriptable
+2025-03-14 00:35:04,826 - reports - INFO: Записан результат работы функции <function spending_by_workday at 0x105403100>
