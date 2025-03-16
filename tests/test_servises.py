@@ -109,6 +109,34 @@ def test_analyze_cashback(transactions, year, month, expected_output):
     assert result == expected_output
 
 
+def create_test_transactions():
+    return [
+        {"Дата операции": "01.10.2023 12:00:00", "Категория": "Еда", "Сумма операции": -1000, "Кэшбэк": 10},
+        {"Дата операции": "05.10.2023 12:00:00", "Категория": "Транспорт", "Сумма операции": -500, "Кэшбэк": None},
+        {"Дата операции": "10.10.2023 12:00:00", "Категория": "Еда", "Сумма операции": -2000, "Кэшбэк": 20},
+        {"Дата операции": "15.09.2023 12:00:00", "Категория": "Развлечения", "Сумма операции": -1500, "Кэшбэк": 15},
+        {"Дата операции": "20.10.2023 12:00:00", "Категория": "Транспорт", "Сумма операции": -300, "Кэшбэк": None},
+    ]
+
+
+# Тест для проверки обработки пустого списка
+def test_analyze_cashback_empty():
+    result = analyze_cashback([], 2023, 10)
+    result_dict = json.loads(result)
+    assert result_dict == {}
+
+
+# Тест для проверки обработки исключений
+def test_analyze_cashback_with_exception():
+    transactions = [
+        {"Дата операции": "01.10.2023 12:00:00", "Категория": "Еда"},  # отсутствует "Сумма операции"
+    ]
+    result = analyze_cashback(transactions, 2023, 10)
+
+    # Ожидаем, что функция не вызовет исключение и вернет пустую строку
+    assert result == ""
+
+
 @pytest.mark.parametrize(
     "transactions, date, limit, expected_output",
     [
@@ -150,6 +178,40 @@ def test_analyze_cashback(transactions, year, month, expected_output):
 def test_investment_bank(transactions, date, limit, expected_output):
     result = investment_bank(transactions, date, limit)
     assert result == expected_output
+
+
+# Пример данных для тестирования
+def create_test_transactions_1():
+    return [
+        {"Дата операции": "01.10.2023 12:00:00", "Категория": "Еда", "Сумма операции": -1000},
+        {"Дата операции": "05.10.2023 12:00:00", "Категория": "Транспорт", "Сумма операции": -500},
+        {"Дата операции": "10.10.2023 12:00:00", "Категория": "Переводы", "Сумма операции": -200},
+        {"Дата операции": "20.10.2023 12:00:00", "Категория": "Наличные", "Сумма операции": -300},
+        {"Дата операции": "25.10.2023 12:00:00", "Категория": "Ярмарка", "Сумма операции": -600},
+    ]
+
+
+# Тест для проверки обработки пустого списка
+def test_investment_bank_empty():
+    result = investment_bank([], "2023.10", 100)
+    assert result == 0.0  # Ожидаем, что сумма будет 0 для пустого списка
+
+
+# Тест для проверки обработки исключений
+def test_investment_bank_with_exception():
+    transactions = [
+        {"Дата операции": "01.10.2023 12:00:00", "Категория": "Еда"},  # отсутствует "Сумма операции"
+    ]
+    result = investment_bank(transactions, "2023.10", 100)
+    assert isinstance(result, Exception)  # Ожидаем, что функция вернет исключение
+
+
+def test_investment_bank_with_exception_1():
+    transactions = [
+        {"Дата операции": "01.10.2023 12:00:00", "Категория": "Еда"},  # отсутствует "Сумма операции"
+    ]
+    result = investment_bank(transactions, "2023.10", 100)
+    assert isinstance(result, Exception)  # Ожидаем, что функция вернет исключение
 
 
 @pytest.mark.parametrize(
@@ -212,6 +274,35 @@ def test_search_transactions_by_user_choice(transactions, search, expected_outpu
     assert result == expected_output
 
 
+def create_test_transactions_2():
+    return [
+        {"Категория": "Еда", "Описание": "Ужин в ресторане", "Сумма": -500},
+        {"Категория": "Транспорт", "Описание": "Поездка на такси", "Сумма": -300},
+        {"Категория": "Развлечения", "Описание": "Кино", "Сумма": -400},
+        {"Категория": "Еда", "Описание": "Покупка продуктов", "Сумма": -200},
+    ]
+
+
+# Тест для пустого списка транзакций
+def test_empty_transactions():
+    transactions = []
+    search_result = search_transactions_by_user_choice(transactions, "Что-то")
+    assert json.loads(search_result) == []  # Ожидаем пустой результат
+
+# Тест для случая, когда ничего не найдено
+def test_no_matches():
+    transactions = create_test_transactions()
+    search_result = search_transactions_by_user_choice(transactions, "Ничего не найдено")
+    assert json.loads(search_result) == []  # Ожидаем пустой результат
+
+
+# Тест для обработки исключений
+def test_exception_handling():
+    # Мы не будем создавать транзакции, чтобы протестировать обработку исключений
+    result = search_transactions_by_user_choice(None, "Тест")
+    assert result == ""  # Ожидаем пустую строку при ошибке
+
+
 def test_search_transaction_by_mobile_phone() -> None:
     transactions = [
         {"Описание": "Я МТС +7 921 11-22-33", "Сумма операции": -1000},
@@ -233,6 +324,37 @@ def test_search_transaction_by_mobile_phone() -> None:
 
     result = search_transaction_by_mobile_phone(transactions)
     assert result == expected_output
+
+
+def create_test_transactions_3():
+    return [
+        {"Категория": "Еда", "Описание": "Ужин в ресторане +1234567890", "Сумма": -500},
+        {"Категория": "Транспорт", "Описание": "Поездка на такси", "Сумма": -300},
+        {"Категория": "Развлечения", "Описание": "Кино +987654321", "Сумма": -400},
+        {"Категория": "Еда", "Описание": "Покупка продуктов", "Сумма": -200},
+        {"Категория": "Звонки", "Описание": "+1122334455 и еще что-то", "Сумма": -100},
+    ]
+
+
+# Тест для случая, когда транзакций нет
+def test_no_transactions():
+    transactions = []
+    search_result = search_transaction_by_mobile_phone(transactions)
+    assert json.loads(search_result) == []  # Ожидаем пустой результат
+
+# Тест для случая, когда номер телефона не найден
+def test_no_matches_2():
+    transactions = create_test_transactions()
+    for transaction in transactions:
+        transaction["Описание"] = "Нет номеров здесь"
+    search_result = search_transaction_by_mobile_phone(transactions)
+    assert json.loads(search_result) == []  # Ожидаем пустой результат
+
+# Тест для обработки исключений
+def test_exception_handling_2():
+    # Тест на случай, когда передается некорректный тип
+    result = search_transaction_by_mobile_phone(None)
+    assert result == ""  # Ожидаем пустую строку при ошибке
 
 
 def test_find_person_to_person_transactions() -> None:
@@ -258,3 +380,51 @@ def test_find_person_to_person_transactions() -> None:
 
     result = find_person_to_person_transactions(transactions)
     assert result == expected_output
+
+
+def create_test_transactions():
+    return [
+        {"Категория": "Переводы", "Описание": "Перевод Ивану И. 500", "Сумма": -500},
+        {"Категория": "Траты", "Описание": "Покупка продуктов", "Сумма": -200},
+        {"Категория": "Переводы", "Описание": "Перевод Петрову П. 1000", "Сумма": -1000},
+        {"Категория": "Переводы", "Описание": "Перевод Алексею А. 300", "Сумма": -300},
+        {"Категория": "Переводы", "Описание": "Подарок другу", "Сумма": -100},
+    ]
+
+
+# Тест для проверки поиска транзакций с именами
+def test_find_person_to_person_transactions_1():
+    transactions = create_test_transactions()
+    search_result = find_person_to_person_transactions(transactions)
+
+    expected_result = [
+        {"Категория": "Переводы", "Описание": "Перевод Ивану И. 500", "Сумма": -500},
+        {"Категория": "Переводы", "Описание": "Перевод Петрову П. 1000", "Сумма": -1000},
+        {"Категория": "Переводы", "Описание": "Перевод Алексею А. 300", "Сумма": -300},
+    ]
+
+    assert json.loads(search_result) == expected_result
+
+
+# Тест для случая, когда транзакций нет
+def test_no_transactions_4():
+    transactions = []
+    search_result = find_person_to_person_transactions(transactions)
+    assert json.loads(search_result) == []  # Ожидаем пустой результат
+
+
+# Тест для случая, когда нет переводов
+def test_no_matches_4():
+    transactions = create_test_transactions()
+    for transaction in transactions:
+        transaction["Категория"] = "Траты"  # Меняем категорию на 'Траты'
+
+    search_result = find_person_to_person_transactions(transactions)
+    assert json.loads(search_result) == []  # Ожидаем пустой результат
+
+
+# Тест для обработки исключений
+def test_exception_handling_4():
+    # Тест на случай, когда передается некорректный тип
+    result = find_person_to_person_transactions(None)
+    assert result == ""  # Ожидаем пустую строку при ошибке

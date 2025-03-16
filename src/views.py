@@ -7,9 +7,10 @@ from dotenv import load_dotenv
 from src.utils import (filter_transactions, get_cards_data, get_exchange_rates, get_stocks_cost,
                        get_top_5_transactions, greeting, read_transaction_excel)
 
-with open("../data/user_settings.json", "r") as file:
+
+with open("/Users/evgeniaavksenteva/PycharmProjects/Course_Project_1/data/user_settings.json", "r") as file:
     user_choice = json.load(file)
-load_dotenv()
+    load_dotenv()
 api_key_currency = os.getenv("API_KEY_CURRENCY")
 api_key_stocks = os.getenv("API_KEY_STOCKS")
 input_date_str = "20.03.2020"

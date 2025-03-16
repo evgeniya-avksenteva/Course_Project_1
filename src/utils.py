@@ -162,7 +162,7 @@ def get_stocks_cost(companies: List[str], api_key_stocks: Any) -> List[Dict]:
             if time_series:
                 latest_date = max(time_series.keys())
                 latest_data = time_series[latest_date]
-                stock_cost = round(latest_data["4. close"], 2)
+                stock_cost = latest_data["4. close"]
                 stocks_cost.append({"stock": company, "price": float(stock_cost)})
             else:
                 print(f"Ошибка: данные для компании {company} недоступны. API ответ {data}")

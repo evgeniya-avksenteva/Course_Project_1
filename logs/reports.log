@@ -1,4 +1,4 @@
-2025-03-14 00:35:04,825 - reports - ERROR: Возникла ошибка 'function' object is not subscriptable
-2025-03-14 00:35:04,825 - reports - INFO: Записан результат работы функции <function spending_by_weekday at 0x105402fc0>
-2025-03-14 00:35:04,826 - reports - ERROR: Возникла ошибка 'function' object is not subscriptable
-2025-03-14 00:35:04,826 - reports - INFO: Записан результат работы функции <function spending_by_workday at 0x105403100>
+2025-03-16 22:56:12,956 - reports - INFO: Средние траты по дням недели начиная с 2020-05-20 00:00:00
+2025-03-16 22:56:12,957 - reports - INFO: Записан результат работы функции <function spending_by_weekday at 0x10657d120>
+2025-03-16 22:56:12,959 - reports - INFO: средние траты за последние три месяца от 2020-05-20 00:00:00 по рабочим и выходным дням
+2025-03-16 22:56:12,959 - reports - INFO: Записан результат работы функции <function spending_by_workday at 0x10657d260>
