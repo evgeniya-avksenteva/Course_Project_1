@@ -28,11 +28,17 @@ def read_transaction_excel(file_excel: str) -> list:
 #    print(result_excel[3])
 
 
-def filter_transactions(transactions: List[Dict], input_date_str: str) -> list:  # дата дд.мм.гггг
-    """Функция принимает список словарей с транзакциями и дату
-    фильтрует транзакции с начала месяца,
-    на который выпадает входящая дата по входящую дату."""
-    input_date = datetime.strptime(input_date_str, "%d.%m.%Y")
+def filter_transactions(transactions: List[Dict], input_date_str: str) -> list:
+    """Функция принимает список словарей с транзакциями и строку даты в формате YYYY-MM-DD HH:MM:SS,
+    или дд.мм.гггг, фильтрует транзакции с начала месяца, на который выпадает входящая дата по входящую дату."""
+
+    # Пробуем преобразовать строку даты в формат datetime
+    try:
+        input_date = datetime.strptime(input_date_str, "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        # Если не удалось, пробуем другой формат
+        input_date = datetime.strptime(input_date_str, "%d.%m.%Y")
+
     end_date = input_date + timedelta(days=1)
     start_date = datetime(end_date.year, end_date.month, 1)
 
@@ -43,10 +49,16 @@ def filter_transactions(transactions: List[Dict], input_date_str: str) -> list: 
     filtered_transaction = [
         transaction
         for transaction in transactions
-        if start_date <= parse_date(transaction["Дата операции"]) <= end_date
+        if start_date <= parse_date(transaction["Дата операции"]) < end_date
     ]
     logger.info(f"Транзакции в списке отфильтрованы по датам от {start_date} до {end_date}")
     return filtered_transaction
+
+
+# if __name__ == '__main__':
+#     input_date_str = "2023-10-15 00:00:00"
+#     filtered_transactions = filter_transactions(transactions, input_date_str)
+#     print(filtered_transactions)
 
 
 def greeting() -> str:

@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from src.utils import (filter_transactions, get_cards_data, get_exchange_rates, get_stocks_cost,
                        get_top_5_transactions, greeting, read_transaction_excel)
 
-
 with open("/Users/evgeniaavksenteva/PycharmProjects/Course_Project_1/data/user_settings.json", "r") as file:
     user_choice = json.load(file)
     load_dotenv()

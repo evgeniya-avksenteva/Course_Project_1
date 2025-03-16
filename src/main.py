@@ -2,16 +2,9 @@ import pandas as pd
 
 import config
 from src.reports import spending_by_weekday, spending_by_workday
-from src.services import (
-    analyze_cashback,
-    find_person_to_person_transactions,
-    investment_bank,
-    search_transaction_by_mobile_phone,
-    search_transactions_by_user_choice,
-)
-
+from src.services import (analyze_cashback, find_person_to_person_transactions, investment_bank,
+                          search_transaction_by_mobile_phone, search_transactions_by_user_choice)
 from src.views import main, user_choice
-
 
 # Веб страницы
 main_page = main(config.input_date_str, user_choice, config.api_key_currency, config.api_key_stocks)

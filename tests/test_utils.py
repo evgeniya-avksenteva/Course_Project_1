@@ -1,14 +1,13 @@
 from datetime import datetime
 from pathlib import Path
-from unittest.mock import patch, Mock
-from typing import List, Dict
+from typing import Any
+from unittest.mock import Mock, patch
 
 import pandas as pd
 import pytest
 
-from src.utils import (filter_transactions, get_cards_data, get_top_5_transactions, greeting,
-                       read_transaction_excel, get_exchange_rates, get_stocks_cost)
-
+from src.utils import (filter_transactions, get_cards_data, get_exchange_rates, get_top_5_transactions, greeting,
+                       read_transaction_excel)
 
 ROOT_PATH = Path(__file__).resolve().parent.parent
 
@@ -33,15 +32,17 @@ def test_get_data_from_xlsx() -> None:
         result = read_transaction_excel(r"../data/operations.xlsx")
         assert result == test_data
 
-@patch('pandas.read_excel')
-def test_get_excel_df_2(mock_get):
-    mock_get.return_value =pd.DataFrame({})
-    assert read_transaction_excel('filename.xlsx') == []
 
-@patch('pandas.read_excel')
-def test_read_transaction_failure(mock_get_2):
+@patch("pandas.read_excel")
+def test_get_excel_df_2(mock_get) -> None:
+    mock_get.return_value = pd.DataFrame({})
+    assert read_transaction_excel("filename.xlsx") == []
+
+
+@patch("pandas.read_excel")
+def test_read_transaction_failure(mock_get_2) -> None:
     mock_get_2.side_effect = Exception("Ошибка чтения файла")
-    assert read_transaction_excel('filename.xlsx') == []
+    assert read_transaction_excel("filename.xlsx") == []
 
 
 @pytest.fixture
@@ -119,7 +120,7 @@ def test_transactions() -> None:
         ),
     ],
 )
-def test_filter_transactions(test_transactions, input_date_str, expected_result):
+def test_filter_transactions(test_transactions: list, input_date_str: str, expected_result: list) -> None:
     result = filter_transactions(test_transactions, input_date_str)
     assert result == expected_result
 
@@ -134,14 +135,14 @@ def test_filter_transactions(test_transactions, input_date_str, expected_result)
         (2, "Доброй ночи"),
     ],
 )
-def test_greeting(mock_datetime, current_hour, expected_greeting):
+def test_greeting(mock_datetime: Any, current_hour: int, expected_greeting: str) -> None:
     mock_now = datetime(2023, 6, 20, current_hour, 0, 0)
     mock_datetime.now.return_value = mock_now
     result = greeting()
     assert result == expected_greeting
 
 
-def test_get_cards_data_empty():
+def test_get_cards_data_empty() -> None:
     transactions = []
     expected_result = []
     assert get_cards_data(transactions) == expected_result
@@ -191,7 +192,7 @@ def test_get_cards_data_cashback() -> None:
     assert get_cards_data(transactions) == expected_result
 
 
-def test_get_top_5_transactions_empty():
+def test_get_top_5_transactions_empty() -> None:
     transactions = []
     expected_result = []
     assert get_top_5_transactions(transactions) == expected_result
@@ -334,54 +335,40 @@ API_KEY = "test_api_key"
 CURRENCIES = ["USD", "EUR"]
 
 
-def test_get_exchange_rates_success():
-    with patch('requests.get') as mock_get:
+def test_get_exchange_rates_success() -> None:
+    with patch("requests.get") as mock_get:
         # Имитация успешного ответа API
         mock_response = Mock()
         mock_response.status_code = 200
-        mock_response.json.return_value = {
-            "conversion_rates": {
-                "RUB": 70.0
-            }
-        }
+        mock_response.json.return_value = {"conversion_rates": {"RUB": 70.0}}
         mock_get.return_value = mock_response
 
-        expected_result = [
-            {"currency": "USD", "rate": 70.0},
-            {"currency": "EUR", "rate": 70.0}
-        ]
+        expected_result = [{"currency": "USD", "rate": 70.0}, {"currency": "EUR", "rate": 70.0}]
 
         result = get_exchange_rates(CURRENCIES, API_KEY)
         assert result == expected_result
 
 
-def test_get_exchange_rates_api_error():
-    with patch('requests.get') as mock_get:
+def test_get_exchange_rates_api_error() -> None:
+    with patch("requests.get") as mock_get:
         # Имитация ошибки API
         mock_response = Mock()
         mock_response.status_code = 400
         mock_response.text = "Bad Request"
         mock_get.return_value = mock_response
 
-        expected_result = [
-            {"currency": "USD", "rate": None},
-            {"currency": "EUR", "rate": None}
-        ]
+        expected_result = [{"currency": "USD", "rate": None}, {"currency": "EUR", "rate": None}]
 
         result = get_exchange_rates(CURRENCIES, API_KEY)
         assert result == expected_result
 
 
-def test_get_exchange_rates_partial_success():
-    with patch('requests.get') as mock_get:
+def test_get_exchange_rates_partial_success() -> None:
+    with patch("requests.get") as mock_get:
         # Имитация частичного успеха
         mock_response_usd = Mock()
         mock_response_usd.status_code = 200
-        mock_response_usd.json.return_value = {
-            "conversion_rates": {
-                "RUB": 70.0
-            }
-        }
+        mock_response_usd.json.return_value = {"conversion_rates": {"RUB": 70.0}}
 
         mock_response_eur = Mock()
         mock_response_eur.status_code = 400
@@ -389,15 +376,12 @@ def test_get_exchange_rates_partial_success():
 
         mock_get.side_effect = [mock_response_usd, mock_response_eur]  # Устанавливаем разные ответы для разных вызовов
 
-        expected_result = [
-            {"currency": "USD", "rate": 70.0},
-            {"currency": "EUR", "rate": None}
-        ]
+        expected_result = [{"currency": "USD", "rate": 70.0}, {"currency": "EUR", "rate": None}]
 
         result = get_exchange_rates(CURRENCIES, API_KEY)
         assert result == expected_result
 
 
-def test_get_exchange_rates_empty_list():
+def test_get_exchange_rates_empty_list() -> None:
     result = get_exchange_rates([], API_KEY)
     assert result == []  # Ожидаем пустой список при передаче пустого списка валют
