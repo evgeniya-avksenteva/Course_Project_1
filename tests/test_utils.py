@@ -81,48 +81,46 @@ def test_transactions() -> None:
     ]
 
 
-@pytest.mark.parametrize(
-    "input_date_str, expected_result",
-    [
-        (
-            "20.06.2023",
-            [
-                {
-                    "Дата операции": "01.06.2023 12:00:00",
-                    "Сумма операции": "-100.50",
-                    "Категория": "Покупки",
-                    "Описание": "Магазин",
-                },
-                {
-                    "Дата операции": "15.06.2023 18:30:00",
-                    "Сумма операции": "-250.00",
-                    "Категория": "Ресторан",
-                    "Описание": "Ужин",
-                },
-                {
-                    "Дата операции": "20.06.2023 10:00:00",
-                    "Сумма операции": "-75.00",
-                    "Категория": "Транспорт",
-                    "Описание": "Такси",
-                },
-            ],
-        ),
-        (
-            "15.05.2023",
-            [
-                {
-                    "Дата операции": "05.05.2023 08:15:00",
-                    "Сумма операции": "-500.00",
-                    "Категория": "Медицина",
-                    "Описание": "Аптека",
-                },
-            ],
-        ),
-    ],
-)
-def test_filter_transactions(test_transactions: list, input_date_str: str, expected_result: list) -> None:
-    result = filter_transactions(test_transactions, input_date_str)
-    assert result == expected_result
+@pytest.fixture
+def transactions():
+    """Фикстура для тестовых данных"""
+    return [
+        {"Дата операции": "01.10.2023 12:00:00", "Сумма": 100},
+        {"Дата операции": "15.10.2023 15:30:00", "Сумма": 200},
+        {"Дата операции": "20.10.2023 10:00:00", "Сумма": 300},
+        {"Дата операции": "01.11.2023 09:00:00", "Сумма": 400},
+        {"Дата операции": "15.10.2023 09:00:00", "Сумма": 500},
+    ]
+
+
+def test_invalid_date_format(transactions):
+    """Тестирование с некорректным форматом даты"""
+    input_date_str = "15-10-2023 00:00:00"
+    expected_output = []
+    result = filter_transactions(transactions, input_date_str)
+    assert result == expected_output
+
+
+def test_empty_transactions():
+    """Тестирование с пустым списком транзакций"""
+    input_date_str = "2023-10-15 00:00:00"
+    expected_output = []
+    result = filter_transactions([], input_date_str)
+    assert result == expected_output
+
+
+def test_edge_case_start_of_month(transactions):
+    """Тестирование на границе начала месяца"""
+    input_date_str = "2023-10-01 00:00:00"
+    expected_output = [
+        {"Дата операции": "01.10.2023 12:00:00", "Сумма": 100},
+    ]
+    result = filter_transactions(transactions, input_date_str)
+    assert result == expected_output
+
+
+if __name__ == "__main__":
+    pytest.main()
 
 
 @patch("src.utils.datetime")

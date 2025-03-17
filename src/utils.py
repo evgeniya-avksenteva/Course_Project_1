@@ -30,35 +30,46 @@ def read_transaction_excel(file_excel: str) -> list:
 
 def filter_transactions(transactions: List[Dict], input_date_str: str) -> list:
     """Функция принимает список словарей с транзакциями и строку даты в формате YYYY-MM-DD HH:MM:SS,
-    или дд.мм.гггг, фильтрует транзакции с начала месяца, на который выпадает входящая дата по входящую дату."""
+    фильтрует транзакции с начала месяца, на который выпадает входящая дата по входящую дату."""
 
     # Пробуем преобразовать строку даты в формат datetime
     try:
         input_date = datetime.strptime(input_date_str, "%Y-%m-%d %H:%M:%S")
-    except ValueError:
-        # Если не удалось, пробуем другой формат
-        input_date = datetime.strptime(input_date_str, "%d.%m.%Y")
+    except ValueError as e:
+        logger.error(f"Неверный формат даты: {input_date_str}. Ошибка: {e}")
+        return []
 
     end_date = input_date + timedelta(days=1)
     start_date = datetime(end_date.year, end_date.month, 1)
 
     def parse_date(date_str: str) -> datetime:
         """Функция переводит дату из формата строки в формат datetime"""
-        return datetime.strptime(date_str, "%d.%m.%Y %H:%M:%S")
+        try:
+            return datetime.strptime(date_str, "%d.%m.%Y %H:%M:%S")
+        except ValueError:
+            logger.error(f"Неверный формат даты в транзакции: {date_str}")
+            return None
 
-    filtered_transaction = [
+    filtered_transactions = [
         transaction
         for transaction in transactions
-        if start_date <= parse_date(transaction["Дата операции"]) < end_date
+        if (parsed_date := parse_date(transaction["Дата операции"])) and start_date <= parsed_date < end_date
     ]
+
     logger.info(f"Транзакции в списке отфильтрованы по датам от {start_date} до {end_date}")
-    return filtered_transaction
+    return filtered_transactions
 
 
-# if __name__ == '__main__':
-#     input_date_str = "2023-10-15 00:00:00"
-#     filtered_transactions = filter_transactions(transactions, input_date_str)
-#     print(filtered_transactions)
+# Пример использования
+if __name__ == "__main__":
+    transactions = [
+        {"Дата операции": "01.10.2023 12:00:00", "Сумма": 100},
+        {"Дата операции": "15.10.2023 15:30:00", "Сумма": 200},
+        {"Дата операции": "20.10.2023 10:00:00", "Сумма": 300},
+    ]
+    input_date_str = "2023-10-15 00:00:00"
+    filtered_transactions = filter_transactions(transactions, input_date_str)
+    print(filtered_transactions)
 
 
 def greeting() -> str:

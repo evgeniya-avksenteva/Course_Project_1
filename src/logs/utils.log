@@ -1,26 +1,26 @@
-2025-03-17 00:18:02,911 - utils - INFO: файл перекодирован в список словарей
-2025-03-17 00:18:03,232 - utils - INFO: файл перекодирован в список словарей
-2025-03-17 00:18:03,264 - utils - INFO: Транзакции в списке отфильтрованы по датам от 2020-03-01 00:00:00 до 2020-03-21 00:00:00
-2025-03-17 00:18:03,264 - utils - INFO: кэшбек и суммы по картам посчитаны
-2025-03-17 00:18:03,264 - utils - INFO: получен словарь по тратам и кешбеку по каждой карте
-2025-03-17 00:18:03,540 - utils - INFO: Выполнен запрос на курс валют
-2025-03-17 00:18:03,775 - utils - INFO: Выполнен запрос на курс валют
-2025-03-17 00:18:03,775 - utils - INFO: Курсы валют созданы
-2025-03-17 00:18:04,156 - utils - INFO: Выполнен запрос на курс акций
-2025-03-17 00:18:04,157 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:04,157 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:05,791 - utils - INFO: Выполнен запрос на курс акций
-2025-03-17 00:18:05,792 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:05,792 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,068 - utils - INFO: Выполнен запрос на курс акций
-2025-03-17 00:18:06,068 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,068 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,351 - utils - INFO: Выполнен запрос на курс акций
-2025-03-17 00:18:06,351 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,351 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,899 - utils - INFO: Выполнен запрос на курс акций
-2025-03-17 00:18:06,899 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,899 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
-2025-03-17 00:18:06,899 - utils - INFO: Стоимость акций создана
-2025-03-17 00:18:06,900 - utils - INFO: Выделено топ 5 больших транзакций
-2025-03-17 00:18:06,900 - utils - INFO: Приветствие ночи выполнено
+2025-03-17 22:51:18,751 - utils - INFO: файл перекодирован в список словарей
+2025-03-17 22:51:19,082 - utils - INFO: файл перекодирован в список словарей
+2025-03-17 22:51:19,095 - utils - ERROR: Неверный формат даты: 20.03.2020. Ошибка: time data '20.03.2020' does not match format '%Y-%m-%d %H:%M:%S'
+2025-03-17 22:51:19,096 - utils - INFO: кэшбек и суммы по картам посчитаны
+2025-03-17 22:51:19,096 - utils - INFO: получен словарь по тратам и кешбеку по каждой карте
+2025-03-17 22:51:19,340 - utils - INFO: Выполнен запрос на курс валют
+2025-03-17 22:51:19,604 - utils - INFO: Выполнен запрос на курс валют
+2025-03-17 22:51:19,605 - utils - INFO: Курсы валют созданы
+2025-03-17 22:51:22,456 - utils - INFO: Выполнен запрос на курс акций
+2025-03-17 22:51:22,456 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:22,457 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:22,745 - utils - INFO: Выполнен запрос на курс акций
+2025-03-17 22:51:22,745 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:22,746 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,347 - utils - INFO: Выполнен запрос на курс акций
+2025-03-17 22:51:27,348 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,348 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,651 - utils - INFO: Выполнен запрос на курс акций
+2025-03-17 22:51:27,651 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,651 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,925 - utils - INFO: Выполнен запрос на курс акций
+2025-03-17 22:51:27,925 - utils - INFO: Получен ответ от api курса акций: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,926 - utils - ERROR: Ошибка ответа: {'Information': 'We have detected your API key as IRBVY0WJJNWBU924 and our standard API rate limit is 25 requests per day. Please subscribe to any of the premium plans at https://www.alphavantage.co/premium/ to instantly remove all daily rate limits.'}
+2025-03-17 22:51:27,926 - utils - INFO: Стоимость акций создана
+2025-03-17 22:51:27,926 - utils - INFO: Выделено топ 5 больших транзакций
+2025-03-17 22:51:27,927 - utils - INFO: Приветствие вечера выполнено

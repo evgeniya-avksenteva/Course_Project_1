@@ -7,7 +7,13 @@ from dotenv import load_dotenv
 from src.utils import (filter_transactions, get_cards_data, get_exchange_rates, get_stocks_cost,
                        get_top_5_transactions, greeting, read_transaction_excel)
 
-with open("/Users/evgeniaavksenteva/PycharmProjects/Course_Project_1/data/user_settings.json", "r") as file:
+# Получаем путь к директории, где находится текущий файл
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Формируем путь к файлу user_settings.json
+settings_path = os.path.join(current_dir, "../data/user_settings.json")
+
+# Открываем файл
+with open(settings_path, "r") as file:
     user_choice = json.load(file)
     load_dotenv()
 api_key_currency = os.getenv("API_KEY_CURRENCY")
