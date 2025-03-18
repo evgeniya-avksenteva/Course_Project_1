@@ -6,8 +6,14 @@ from unittest.mock import Mock, patch
 import pandas as pd
 import pytest
 
-from src.utils import (filter_transactions, get_cards_data, get_exchange_rates, get_top_5_transactions, greeting,
-                       read_transaction_excel)
+from src.utils import (
+    filter_transactions,
+    get_cards_data,
+    get_exchange_rates,
+    get_top_5_transactions,
+    greeting,
+    read_transaction_excel,
+)
 
 ROOT_PATH = Path(__file__).resolve().parent.parent
 

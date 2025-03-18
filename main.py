@@ -2,12 +2,27 @@ import pandas as pd
 
 import config
 from src.reports import spending_by_weekday, spending_by_workday
-from src.services import (analyze_cashback, find_person_to_person_transactions, investment_bank,
-                          search_transaction_by_mobile_phone, search_transactions_by_user_choice)
-from src.views import main, user_choice
+from src.services import (
+    analyze_cashback,
+    find_person_to_person_transactions,
+    investment_bank,
+    search_transaction_by_mobile_phone,
+    search_transactions_by_user_choice,
+)
+from src.views import main
+
+# file_path = r"data/operations.xlsx"
+#
+# # Проверка существования файла
+# if os.path.exists(file_path):
+#     df = pd.read_excel(file_path)
+#     print("Файл успешно загружен.")
+# else:
+#     print(f"Файл не найден: {file_path}")
 
 # Веб страницы
-main_page = main(config.input_date_str, user_choice, config.api_key_currency, config.api_key_stocks)
+# main_page = main(config.input_date_str, user_choice, config.api_key_currency, config.api_key_stocks)
+main_page = main(config.input_date_str)
 print(main_page)
 
 # Сервисы
@@ -24,7 +39,8 @@ print(find_person_to_person_transactions_result)  # В описании есть
 
 
 # Отчёты
-df = pd.read_excel(r"../data/operations.xlsx")
+# df = pd.read_excel(r"../data/operations.xlsx")
+df = pd.read_excel(r"data/operations.xlsx")
 spending_by_weekday_result = spending_by_weekday(df, "2020.05.20")
 spending_by_workday_result = spending_by_workday(df, "2020.05.20")
 print(spending_by_weekday_result)  # Возвращает средние траты в каждый из дней недели за последние три месяца

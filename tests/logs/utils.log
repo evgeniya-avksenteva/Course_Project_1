@@ -1,2 +1,0 @@
-2025-03-17 21:41:33,071 - utils - ERROR: Неверный формат даты: 20.06.2023. Ошибка: time data '20.06.2023' does not match format '%Y-%m-%d %H:%M:%S'
-2025-03-17 21:41:33,091 - utils - ERROR: Неверный формат даты: 15.05.2023. Ошибка: time data '15.05.2023' does not match format '%Y-%m-%d %H:%M:%S'
